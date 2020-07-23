@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from .models import Donation
 from .forms import DonationForm
 
 import razorpay
@@ -18,7 +19,7 @@ def home(request):
                 'amount':donation.amount * 100,
                 'currency': 'INR',
                 'receipt': str(donation.id),
-                'payment_capture':'1',
+                'payment_capture':'0',
                 'notes': {
                     'name': donation.name
                 }
@@ -37,5 +38,10 @@ def home(request):
 
 def success(request):
     if request.method == 'POST':
-        return render(request,'success.html')
+        data = request.POST
+        print(data)
+        donation = Donation.objects.get(payment_id=data['razorpay_order_id'])
+        donation.payment_captured = True
+        donation.save()
+        return render(request,'success.html',context={"name":donation.name})
 
