@@ -10,7 +10,15 @@ Home
     <h1>Welcome To Our Site</h1>
     <div class="m-3 p-3">
         <h2>Complete Your Payment</h2>
-        <form action="" method="post">
+
+        <form action="https://www.example.com/payment/success/" method="POST">
+            <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_9GtISjPbi1bNeB"
+                data-amount="{{amount}}" data-currency="INR" data-order_id="{{id}}" data-buttontext="Pay with Razorpay"
+                data-name="Donation Center" data-description="Donation" data-prefill.name="{{name}}"
+                data-prefill.email="gaurav.kumar@example.com" data-prefill.contact="9999999999"
+                data-theme.color="#F37254" data-image="https://example.com/your_logo.jpg">
+                </script>
+            <input type="hidden" custom="Hidden Element" name="hidden">
         </form>
     </div>
 
